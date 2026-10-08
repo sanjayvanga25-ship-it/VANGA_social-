@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vanga Social</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family:Arial,sans-serif;
+}
+
+body{
+  background:#f2f2f2;
+  padding-bottom:70px;
+}
+
+header{
+  background:white;
+  padding:15px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  position:sticky;
+  top:0;
+  z-index:10;
+  border-bottom:1px solid #ddd;
+}
+
+.logo{
+  font-size:24px;
+  font-weight:bold;
+}
+
+.container{
+  max-width:500px;
+  margin:auto;
+}
+
+.post{
+  background:white;
+  margin:12px 0;
+  border-radius:8px;
+  overflow:hidden;
+}
+
+.user{
+  padding:12px;
+  font-weight:bold;
+}
+
+.post img{
+  width:100%;
+  display:block;
+}
+
+.actions{
+  padding:10px;
+}
+
+button{
+  border:0;
+  background:none;
+  font-size:22px;
+  margin-right:15px;
+  cursor:pointer;
+}
+
+.likes{
+  padding:0 10px 8px;
+  font-weight:bold;
+}
+
+.caption{
+  padding:0 10px 15px;
+}
+
+nav{
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  background:white;
+  height:60px;
+  display:flex;
+  justify-content:space-around;
+  align-items:center;
+  border-top:1px solid #ddd;
+}
+
+nav button{
+  font-size:25px;
+  margin:0;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">Vanga Social</div>
+  <div>🔍</div>
+</header>
+
+<div class="container">
+
+  <div class="post">
+    <div class="user">👤 Vanga User</div>
+
+    <img src="https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=800&q=80">
+
+    <div class="actions">
+      <button onclick="likePost(this)">♡</button>
+      <button>💬</button>
+      <button>📤</button>
+    </div>
+
+    <div class="likes">❤️ <span>0</span> likes</div>
+
+    <div class="caption">
+      <b>Vanga User</b> Welcome to Vanga Social 🚀
+    </div>
+  </div>
+
+</div>
+
+<nav>
+  <button>🏠</button>
+  <button>🔍</button>
+  <button>➕</button>
+  <button>❤️</button>
+  <button>👤</button>
+</nav>
+
+<script>
+function likePost(button){
+  const likes = button.parentElement.nextElementSibling;
+  const number = likes.querySelector("span");
+
+  if(button.innerHTML === "♡"){
+    button.innerHTML = "❤️";
+    number.innerText = Number(number.innerText) + 1;
+  }else{
+    button.innerHTML = "♡";
+    number.innerText = Number(number.innerText) - 1;
+  }
+}
+</script>
+
+</body>
+</html>
