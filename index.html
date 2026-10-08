@@ -15,11 +15,12 @@
 
 body{
   background:#f2f2f2;
-  padding-bottom:70px;
+  padding-bottom:75px;
 }
 
 header{
   background:white;
+  height:65px;
   padding:15px;
   display:flex;
   justify-content:space-between;
@@ -43,18 +44,21 @@ header{
 .post{
   background:white;
   margin:12px 0;
-  border-radius:8px;
+  border-radius:10px;
   overflow:hidden;
 }
 
 .user{
   padding:12px;
   font-weight:bold;
+  font-size:18px;
 }
 
 .post img{
   width:100%;
   display:block;
+  max-height:500px;
+  object-fit:cover;
 }
 
 .actions{
@@ -64,9 +68,8 @@ header{
 button{
   border:0;
   background:none;
-  font-size:22px;
+  font-size:24px;
   margin-right:15px;
-  cursor:pointer;
 }
 
 .likes{
@@ -76,6 +79,40 @@ button{
 
 .caption{
   padding:0 10px 15px;
+  font-size:16px;
+}
+
+.create{
+  background:white;
+  margin:12px;
+  padding:15px;
+  border-radius:10px;
+}
+
+.create h3{
+  margin-bottom:12px;
+}
+
+input[type="file"]{
+  width:100%;
+  margin-bottom:10px;
+}
+
+input[type="text"]{
+  width:100%;
+  padding:12px;
+  border:1px solid #ccc;
+  border-radius:8px;
+  margin-bottom:10px;
+}
+
+.postBtn{
+  background:#1877f2;
+  color:white;
+  padding:12px 20px;
+  border-radius:8px;
+  font-size:16px;
+  width:100%;
 }
 
 nav{
@@ -83,12 +120,13 @@ nav{
   bottom:0;
   left:0;
   right:0;
+  height:65px;
   background:white;
-  height:60px;
   display:flex;
   justify-content:space-around;
   align-items:center;
   border-top:1px solid #ddd;
+  z-index:20;
 }
 
 nav button{
@@ -107,24 +145,47 @@ nav button{
 
 <div class="container">
 
-  <div class="post">
-    <div class="user">👤 Vanga User</div>
+<div class="create">
+  <h3>➕ Create New Post</h3>
 
-    <img src="https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=800&q=80">
+  <input type="file" id="photo" accept="image/*">
 
-    <div class="actions">
-      <button onclick="likePost(this)">♡</button>
-      <button>💬</button>
-      <button>📤</button>
-    </div>
+  <input
+    type="text"
+    id="caption"
+    placeholder="Write a caption..."
+  >
 
-    <div class="likes">❤️ <span>0</span> likes</div>
+  <button class="postBtn" onclick="createPost()">
+    📸 Post
+  </button>
+</div>
 
-    <div class="caption">
-      <b>Vanga User</b> Welcome to Vanga Social 🚀
-    </div>
+<div id="feed">
+
+<div class="post">
+
+  <div class="user">👤 Vanga User</div>
+
+  <img src="https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=800&q=80">
+
+  <div class="actions">
+    <button onclick="likePost(this)">♡</button>
+    <button>💬</button>
+    <button>📤</button>
   </div>
 
+  <div class="likes">
+    ❤️ <span>0</span> likes
+  </div>
+
+  <div class="caption">
+    <b>Vanga User</b> Welcome to Vanga Social 🚀
+  </div>
+
+</div>
+
+</div>
 </div>
 
 <nav>
@@ -136,19 +197,46 @@ nav button{
 </nav>
 
 <script>
+
 function likePost(button){
-  const likes = button.parentElement.nextElementSibling;
-  const number = likes.querySelector("span");
+
+  const likes =
+    button.parentElement.nextElementSibling;
+
+  const number =
+    likes.querySelector("span");
 
   if(button.innerHTML === "♡"){
+
     button.innerHTML = "❤️";
-    number.innerText = Number(number.innerText) + 1;
+
+    number.innerText =
+      Number(number.innerText) + 1;
+
   }else{
+
     button.innerHTML = "♡";
-    number.innerText = Number(number.innerText) - 1;
+
+    number.innerText =
+      Number(number.innerText) - 1;
   }
 }
-</script>
 
-</body>
-</html>
+
+function createPost(){
+
+  const photo =
+    document.getElementById("photo");
+
+  const caption =
+    document.getElementById("caption");
+
+  if(photo.files.length === 0){
+
+    alert("Please select a photo");
+
+    return;
+  }
+
+
+  
